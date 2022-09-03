@@ -1,3 +1,16 @@
+# CUMCM Thesis
+
+本仓库源自 Overleaf 的一个[模板](https://www.overleaf.com/latex/templates/quan-guo-da-xue-sheng-shu-xue-jian-mo-jing-sai-bian-xie-de-latex/tkpdcwqsphwk)。现在此基础上依照 [2021 年版全国大学生数学建模竞赛论文格式规范](http://www.mcm.edu.cn/html_cn/node/d45fca716612573d44fc92b9aec54f9e.html)和一些优秀范文的样式作出修改。
+
+本仓库 GitHub 镜像站：<https://github.com/LittleYe233/CUMCMThesis>。
+
+使用前，请详读并比对当年竞赛的论文格式规范。
+
+注意以下文档中出现的链接均为绝对地址，且并未指向本仓库。访问链接时，请注意跳转情况。
+
+以下为模板 `README.md` 原文，仅对不符合 VS Code Markdown 推荐格式的部分作出不影响文意的修改：
+
+---
 
 ## 全国大学生数学建模竞赛 LaTeX 论文模板  
 
@@ -7,12 +20,9 @@ cumcmthesis 是为全国大学生数学建模竞赛编写的 `LaTeX` 模板, 旨
 定的 `LaTeX` 的使用经验, 至少要会使用 `ctex` 宏包的一些功能, 比如调节字距或修改字体
 大小等等. 例子文件参看 [example.pdf](https://github.com/latexstudio/CUMCMThesis/blob/master/example.pdf).
 
-另外, 本模板制作了视频使用教程, 参看[这里](https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-3473795048.2.ZlPoPL&id=43823508044). 
+另外, 本模板制作了视频使用教程, 参看[这里](https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-3473795048.2.ZlPoPL&id=43823508044).
 
 <img src="https://github.com/latexstudio/CUMCMThesis/blob/master/figures/gongzhonghao2.png" alt="" width="350px">
-
-
-
 
 2019年建模模板的免费视频教程：
 
@@ -22,14 +32,14 @@ cumcmthesis 是为全国大学生数学建模竞赛编写的 `LaTeX` 模板, 旨
 第二部分：
 [https://www.bilibili.com/video/av64221508](https://www.bilibili.com/video/av64221508)
 
+![example-1](https://github.com/latexstudio/CUMCMThesis/blob/master/example-1.png)
 
-![](https://github.com/latexstudio/CUMCMThesis/blob/master/example-1.png)
+![example-2](https://github.com/latexstudio/CUMCMThesis/blob/master/example-3.png)
 
-![](https://github.com/latexstudio/CUMCMThesis/blob/master/example-3.png)
-
-![](https://github.com/latexstudio/CUMCMThesis/blob/master/example-4.png)
+![example-3](https://github.com/latexstudio/CUMCMThesis/blob/master/example-4.png)
 
 ## 更新记录
+
 2021 年 7 月：
 1， 更新 uline 与 hspace 的兼容问题。
 
@@ -59,7 +69,7 @@ cumcmthesis 是为全国大学生数学建模竞赛编写的 `LaTeX` 模板, 旨
 
 2017年8月14日更新说明：
 
-1. 请大家使用较新的 `LaTeX` 发行版本进行编译，下载地址：http://www.latexstudio.net/page/texsoftware 首页焦点图。不要使用 `CTeX` 套装。
+1. 请大家使用较新的 `LaTeX` 发行版本进行编译，下载地址：<http://www.latexstudio.net/page/texsoftware> 首页焦点图。不要使用 `CTeX` 套装。
 
 2. 遇到问题可以到91940767群进行交流或478023327群交流
 
@@ -69,12 +79,14 @@ cumcmthesis 是为全国大学生数学建模竞赛编写的 `LaTeX` 模板, 旨
 
 2. 修改了附录的代码输入样式。
 
-
 如果需要去掉封面并把论文标题保留在摘要上面，在加载类的使用如下语句：
+
+```tex
+\documentclass[withoutpreface,bwprint]{cumcmthesis}
 ```
-    \documentclass[withoutpreface,bwprint]{cumcmthesis}
-```
+
 如果需要封面页，则是与原来一致：
-```
-    \documentclass[bwprint]{cumcmthesis}
+
+```tex
+\documentclass[bwprint]{cumcmthesis}
 ```
