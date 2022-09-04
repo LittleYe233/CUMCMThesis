@@ -38,8 +38,9 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \fi
 % 支持中文的 ctex 宏包
 \RequirePackage{ctex}
+%\ctexset{fontset = cumcm}
 % 页面布局
-\RequirePackage{geometry}
+\RequirePackage[a4paper, margin=0.98in]{geometry}
 % 数学宏包
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
@@ -68,6 +69,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 设置代码环境
 \RequirePackage{listings}
 \RequirePackage{xcolor}
+% 调整行间隔
+\RequirePackage{setspace}
 % 插入链接
 \RequirePackage{url}
 % 绘图的包
@@ -151,13 +154,22 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 每行缩进两个汉字
 \setlength\parindent{2em}
 % 设置字体
-\setmainfont{Times New Roman}
+%% 部分西文字符的字体也需要修改为指定的中文字体。
+%% 因为承诺书（Microsoft Word）中文字体下西文字符的 fallback 恰好是 Times New Roman，故不需要为正文宋体单独设置命令。
+\newcommand{\setmaintnr}{\setmainfont{Times New Roman}}
+\newcommand{\setmainhei}{\setmainfont{SimHei.ttf}[BoldFont=SourceHanSansCN-Bold.otf]}
+\newcommand{\setmainkai}{\setmainfont{楷体_GB2312.ttf}[AutoFakeBold]}
+\setmaintnr
 %\setmonofont{Courier New}
 \setsansfont{Arial}
-\setCJKfamilyfont{kai}[AutoFakeBold]{simkai.ttf}
+\setCJKfamilyfont{kai}[AutoFakeBold]{楷体_GB2312.ttf}
 \newcommand*{\kai}{\CJKfamily{kai}}
-\setCJKfamilyfont{song}[AutoFakeBold]{simsun.ttc}
+\setCJKfamilyfont{song}[AutoFakeBold={2.5}]{SimSun-Regular.ttf}
 \newcommand*{\song}{\CJKfamily{song}}
+\renewcommand{\songti}{\song} % 某些部分的字体仍然调用的是 `\songti' 而非 `\song'
+\renewcommand{\kaishu}{\kai}
+\setCJKfamilyfont{hei}[AutoFakeBold]{SimHei.ttf}
+\renewcommand*{\heiti}{\CJKfamily{hei}}
 
 \renewcommand\normalsize{%
 	\@setfontsize\normalsize{12.05}{14.45}%
@@ -344,41 +356,55 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
   \if@mcm@preface
   \null
  % 承诺书
- \vskip2ex
+ \par\vspace*{-2em}
   \thispagestyle{empty}
-  {\zihao{4}\noindent\mcm@commit@string@headname\\[-8pt]
-  \noindent\rule[5pt]{\textwidth-1.34em}{.5pt}\par}
+  {\zihao{4}\noindent\mcm@commit@string@headname\\[-9pt]
+  \noindent\rule[5pt]{\textwidth-1.34em}{0.92pt}\par}
   \begin{center}%
+    \setmainhei
+    \vspace*{-1.5em}
     {\zihao{-3}\bfseries\heiti \mcm@commit@string@titlea \par}%
-    {\vskip1ex\zihao{3}\bfseries\songti \mcm@commit@string@titleb \par}
+    \setmaintnr
+    \vspace*{0.5em}
+    {\vskip1ex\zihao{3}\bfseries\song \mcm@commit@string@titleb \par}
   \end{center}
-    {\zihao{-4} \mcm@commit@string@contents \par}
+    \vspace*{-20pt}
+    {\linespread{1.62}\zihao{-4} \mcm@commit@string@contents \par}
     {\vskip1ex\zihao{-4}
     \renewcommand{\ULthickness}{0.4pt}\setlength{\ULdepth}{2pt}
-    \hspace*{2em}\mcm@commit@string@problemnum\uline{\mbox{\kern1em}\mcm@tokens@tihao\hfill}\makebox[0.66em]{}\par
-    \mcm@commit@string@signupnum\uline{\mbox{\kern1em}\mcm@tokens@baominghao\hfill}\makebox[0.66em]{}\par
-    \mcm@commit@string@schoolname\uline{\hfill\mcm@tokens@schoolname\hfill}\makebox[0.66em]{}\par
+    \vspace*{0.2em}
+    %% 题号，队号，学校
+    \begin{spacing}{1.7}
+      \mcm@commit@string@problemnum\uline{\mbox{\kern1em}\mcm@tokens@tihao\hfill}\makebox[0.66em]{}\par
+      \mcm@commit@string@signupnum\uline{\mbox{\kern1em}\mcm@tokens@baominghao\hfill}\makebox[0.66em]{}\par
+      \mcm@commit@string@schoolname\uline{\hfill\mcm@tokens@schoolname\hfill}\makebox[0.66em]{}\par
+    \end{spacing}
+    %% 队员
     \newlength{\mcm@lenB}
-    \settowidth{\mcm@lenB}{\mcm@commit@string@membername\mbox{\hspace{1em}}1.}
-    \setlength{\mcm@lenB}{\textwidth-\mcm@lenB}
-    % 不这样做右边难以对齐!
-    \mcm@commit@string@membername
-    \begin{minipage}[t]{\mcm@lenB}
-   	1.\uline{\mbox{\kern1em}\mcm@tokens@membera\hfill} \makebox[0.46em]{}\par
-   	2.\uline{\mbox{\kern1em}\mcm@tokens@memberb\hfill} \makebox[0.46em]{}\par
-   	3.\uline{\mbox{\kern1em}\mcm@tokens@memberc\hfill} \makebox[0.46em]{}\par
-   \end{minipage}\par\vskip1ex
-    \mcm@commit@string@supervisorname\uline{\mbox{\hspace{1em}}\mcm@tokens@supervisor\hfill}\makebox[0.66em]{}\par
-    \hspace{0.1cm} （{\kaishu 指导教师签名意味着对参赛队的行为和论文的真实性负责}）
+    \begin{spacing}{2.26}
+      \settowidth{\mcm@lenB}{\mcm@commit@string@membername\mbox{\hspace{1em}}1.}
+      \setlength{\mcm@lenB}{\textwidth-\mcm@lenB}
+      % 不这样做右边难以对齐!
+      \mcm@commit@string@membername
+      \begin{minipage}[t]{\mcm@lenB}
+       1.\uline{\mbox{\kern1em}\mcm@tokens@membera\hfill} \makebox[0.46em]{}\par
+       2.\uline{\mbox{\kern1em}\mcm@tokens@memberb\hfill} \makebox[0.46em]{}\par
+       3.\uline{\mbox{\kern1em}\mcm@tokens@memberc\hfill} \makebox[0.46em]{}\par
+      \end{minipage}\par\vskip1ex
+    \end{spacing}
+    %% 指导教师
+    {\hskip 2.25em\relax}\mcm@commit@string@supervisorname\uline{\mbox{\hspace{1em}}\mcm@tokens@supervisor\hfill}\makebox[0.66em]{}\par
+    % 注意：此处的括号无法渲染出 SimKai U+0028 和 U+0029。
+    {\vskip 3.2pt\relax}\hspace{0.1cm}{\kaishu（指导教师签名意味着对参赛队的行为和论文的真实性负责）}
     %{\kaishu\mcm@commit@string@inform\par}
-    \vskip2ex
+    \vskip2.5ex
     \newlength{\mcm@lenA}
     \settowidth{\mcm@lenA}{请仔细核对，提交后将不再允许做任何修改。如}% 虽然"日期"刚好在"错误"下面, 但注意"日期"还会缩进, 所以要省去"填写""两字
     \hspace*{\mcm@lenA}\mcm@commit@string@date\hspace{0.5em}\uline{\hfill\mbox{\kern1em}\mcm@tokens@yearinput\mbox{\kern1em}\hfill}%
     \mcm@commit@string@year\uline{\hfill\mcm@tokens@monthinput\hfill}\mcm@commit@string@month%
     \uline{\hfill\mcm@tokens@dayinput\hfill}\mcm@commit@string@day\makebox[1em]{}\par}
-    \vskip1ex
-    {\kaishu\bfseries\mcm@commit@string@inform\par}
+    \vskip3ex\par
+    {\zihao{-4}\kaishu\bfseries\mcm@commit@string@inform\par}
 	\vfill
 	\null
 % 编号专用页
@@ -394,22 +420,25 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newpage
 \null
 \thispagestyle{empty}
-{\zihao{4}\noindent\begin{tabularx}{\textwidth}{cXcX@{}}
+{\zihao{-4}\noindent\setlength\arrayrulewidth{1pt}\begin{tabularx}{\textwidth}{cXcX@{}}
 \mcm@numberpage@string@headname & & \mcm@numberpage@string@allcountrynum&\\[-5pt]
-\mcm@numberpage@string@headnameb & &\mcm@numberpage@string@allcountrynumb&\\
+\mcm@numberpage@string@headnameb & &\mcm@numberpage@string@allcountrynumb&\\[1.9pt]
 \cline{2-2}\cline{4-4}
 \end{tabularx}
 
-\vspace*{1.2em}
+\vspace*{1.6em}
 
-\noindent\rule{\textwidth}{1pt}\par}
+\noindent\rule{\textwidth}{1.6pt}\par}
 \begin{center}
-{\zihao{4}\bfseries\heiti \mcm@numberpage@string@titlea\par}
+\setmainhei
+{\zihao{-3}\bfseries\heiti \mcm@numberpage@string@titlea\par}
+\setmaintnr
+\vspace*{0.2em}
 {\vskip1ex\zihao{3}\songti \bfseries\mcm@numberpage@string@titleb\par}
 \end{center}\par
 {%
 \zihao{4}
-\vskip3em
+\vskip1.9em
 \hspace*{2em}\mcm@numberpage@string@appraiselog
 \par
 \newlength{\mcm@lenC}
@@ -422,16 +451,16 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \settoheight{\mcm@lenF}{\mcm@numberpage@string@remarks}
 \setlength{\mcm@lenF}{\mcm@lenF+2em}
 \newcolumntype{P}{@{}p{\mcm@lenC}@{}}
-\hspace*{1.5em}\begin{tabular}{|!{\hspace{4pt}}c!{\hspace{4pt}}|*{6}{P|}}
+\hspace*{1.5em}\begin{tabular}{|!{\hspace{5.5pt}}c!{\hspace{5.5pt}}|*{6}{P|}}
  \hline
- \rule{0pt}{\mcm@lenD}\raisebox{0.6em}[0pt][0pt]{\mcm@numberpage@string@reviewer} & & & & & &  \\\cline{1-7}
- \rule{0pt}{\mcm@lenF}\raisebox{0.6em}[0pt][0pt]{\mcm@numberpage@string@remarks} & & & & & &  \\
+ \rule{0pt}{\mcm@lenD}\raisebox{0.65em}[0pt][0pt]{\mcm@numberpage@string@reviewer} & & & & & &  \\\cline{1-7}
+ \rule{0pt}{\mcm@lenF}\raisebox{0.65em}[0pt][0pt]{\mcm@numberpage@string@remarks} & & & & & &  \\
  \hline
 \end{tabular}\par
-\vskip5em
-\hspace*{2em}\mcm@numberpage@string@countrynum}
+\vskip4.8em
+\hspace*{2em}\zihao{4}\mcm@numberpage@string@countrynum}
 
-\vfill
+\vspace{12em}\par
 {\zihao{-4}\kaishu\bfseries\mcm@numberpage@string@inform\par}
 
 \null
@@ -596,7 +625,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
  %%% 承诺书中的常量
 \newcommand*\mcm@commit@string@headname{赛区评阅编号（由赛区组委会填写）：}
-\newcommand*\mcm@commit@string@titlea{\the\year 高教社杯全国大学生数学建模竞赛}
+\newcommand*\mcm@commit@string@titlea{\the\year 年高教社杯全国大学生数学建模竞赛}
 \newcommand*\mcm@commit@string@titleb{承\hspace{1em}诺\hspace{1em}书}
 \newcommand\mcm@commit@string@contents{\quotation
 我们仔细阅读了《全国大学生数学建模竞赛章程》和《全国大学生数学建模竞赛参赛规则》（以下简称 “竞赛章程和参赛规则”，可从http://www.mcm.edu.cn下载）。
@@ -615,10 +644,10 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*\mcm@commit@string@schoolname{参赛学校（完整的学校全称，不含院系名）：}
 \newcommand*\mcm@commit@string@membername{参赛队员 (打印并签名) ：}
 \newcommand*\mcm@commit@string@supervisorname{指导教师或指导教师组负责人  (打印并签名)：}
-\newcommand\mcm@commit@string@inform{\quotation
-\noindent{（\bfseries\kai 请勿改动此页内容和格式。此承诺书打印签名后作为纸质论文的封面，注意电子版论文中不得出现此页。%
+\newcommand\mcm@commit@string@inform{
+\setstretch{1.1}
+\setlength{\parindent}{6pt}{\bfseries\kai （请勿改动此页内容和格式。此承诺书打印签名后作为纸质论文的封面，注意电子版论文中不得出现此页。
 以上内容请仔细核对，如填写错误，论文可能被取消评奖资格。）}
-\endquotation
 }
 \newcommand*\mcm@commit@string@date{日期:}
 \newcommand*\mcm@commit@string@year{年}
@@ -631,18 +660,18 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*\mcm@numberpage@string@headnameb{（由赛区填写）}
 \newcommand*\mcm@numberpage@string@allcountrynum{全国评阅编号：}
 \newcommand*\mcm@numberpage@string@allcountrynumb{（全国组委会填写）}
-\newcommand*\mcm@numberpage@string@titlea{\the\year 高教社杯全国大学生数学建模竞赛}
+\newcommand*\mcm@numberpage@string@titlea{\the\year 年高教社杯全国大学生数学建模竞赛}
 \newcommand*\mcm@numberpage@string@titleb{编\hspace{.5em}号\hspace{.5em}专\hspace{.5em}用\hspace{.5em}页}
 \newcommand*\mcm@numberpage@string@appraiselog{赛区评阅记录（可供赛区评阅时使用）：}
 \newcommand\mcm@numberpage@string@reviewer{\shortstack{评\\ 阅\\ 人}}
 \newcommand\mcm@numberpage@string@remarks{\shortstack{备\\ 注}}
 
 
-\newcommand*\mcm@numberpage@string@countrynum{送全国评阅统一编号:\par \hspace*{2em}（赛区组委会填写）}
-\newcommand\mcm@numberpage@string@inform{\quotation
-\noindent（{\bfseries\kai 请勿改动此页内容和格式。此编号专用页仅供赛区和全国评阅使用，参赛队打印后装订到纸质论文的第二页上。
-注意电子版论文中不得出现此页。}）
-\endquotation
+\newcommand*\mcm@numberpage@string@countrynum{送全国评阅统一编号:\vspace*{-0.2em}\par \hspace*{2em}（赛区组委会填写）}
+\newcommand\mcm@numberpage@string@inform{
+\setstretch{1.1}
+\setlength{\parindent}{6pt}{\bfseries\kai （请勿改动此页内容和格式。此编号专用页仅供赛区和全国评阅使用，参赛队打印后装订到纸质论文的第二页上。
+注意电子版论文中不得出现此页。）}
 }
 %设置目录格式
 % 节的目录格式
