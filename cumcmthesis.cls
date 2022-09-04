@@ -642,8 +642,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*\mcm@commit@string@problemnum{我们参赛选择的题号（从A/B/C/D/E中选择一项填写）：}
 \newcommand*\mcm@commit@string@signupnum{我们的报名参赛队号（12位数字全国统一编号）：}
 \newcommand*\mcm@commit@string@schoolname{参赛学校（完整的学校全称，不含院系名）：}
-\newcommand*\mcm@commit@string@membername{参赛队员 (打印并签名) ：}
-\newcommand*\mcm@commit@string@supervisorname{指导教师或指导教师组负责人  (打印并签名)：}
+\newcommand*\mcm@commit@string@membername{参赛队员（打印并签名）：}
+\newcommand*\mcm@commit@string@supervisorname{指导教师或指导教师组负责人　(打印并签名)：}
 \newcommand\mcm@commit@string@inform{
 \setstretch{1.1}
 \setlength{\parindent}{6pt}{\bfseries\kai （请勿改动此页内容和格式。此承诺书打印签名后作为纸质论文的封面，注意电子版论文中不得出现此页。
