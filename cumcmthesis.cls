@@ -156,12 +156,12 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 设置字体
 %% 部分西文字符的字体也需要修改为指定的中文字体。
 %% 因为承诺书（Microsoft Word）中文字体下西文字符的 fallback 恰好是 Times New Roman，故不需要为正文宋体单独设置命令。
-\newcommand{\setmaintnr}{\setmainfont{Times New Roman}}
+\newcommand{\setmaintnr}{\setmainfont{times.ttf}}
 \newcommand{\setmainhei}{\setmainfont{SimHei.ttf}[BoldFont=SourceHanSansCN-Bold.otf]}
 \newcommand{\setmainkai}{\setmainfont{楷体_GB2312.ttf}[AutoFakeBold]}
 \setmaintnr
-%\setmonofont{Courier New}
-\setsansfont{Arial}
+\setmonofont{IBMPlexMono-Regular.otf}
+\setsansfont{arial.ttf}
 \setCJKfamilyfont{kai}[AutoFakeBold]{楷体_GB2312.ttf}
 \newcommand*{\kai}{\CJKfamily{kai}}
 \setCJKfamilyfont{song}[AutoFakeBold={2.5}]{SimSun-Regular.ttf}
