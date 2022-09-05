@@ -76,6 +76,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 绘图的包
 %\RequirePackage{tikz}
 %\usetikzlibrary{snakes}
+% 代码语法高亮，参考 <https://github.com/gpoore/minted>
+\RequirePackage{minted}
 
 % 字图与子标题
 \RequirePackage{subcaption}

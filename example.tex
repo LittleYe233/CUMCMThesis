@@ -450,7 +450,7 @@ f(x) =
 
 \section{排队算法--matlab 源程序}
 
-\begin{lstlisting}[language=matlab]
+\begin{minted}[autogobble, linenos, mathescape, tabsize=4, frame=lines, framesep=2mm]{matlab}
 kk=2;[mdd,ndd]=size(dd);
 while ~isempty(V)
 [tmpd,j]=min(W(i,V));tmpj=V(j);
@@ -468,11 +468,11 @@ end;end
 dd=[dd,[tmp3;tmp(tmp4,2)]];V(tmp(tmp4,3))=[];
 [mdd,ndd]=size(dd);kk=kk+1;
 end; S=ss; D=dd(1,:);
- \end{lstlisting}
+ \end{minted}
 
  \section{规划解决程序--lingo源代码}
 
-\begin{lstlisting}[language=c]
+ \begin{minted}[autogobble, linenos, mathescape, tabsize=4, frame=lines, framesep=2mm]{c}
 kk=2;
 [mdd,ndd]=size(dd);
 while ~isempty(V)
@@ -495,7 +495,7 @@ end
 end;
 S=ss;
 D=dd(1,:);
- \end{lstlisting}
+ \end{minted}
 \end{appendices}
 
 \end{document} 
