@@ -493,7 +493,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 目录深度
 \setcounter{secnumdepth}{3}
 % 节标题格式, 居中, 使用\chinese命令修改计数器
-\def\@seccntformat#1{\csname the#1\endcsname\ }
+%% 设置编号与标题之间的宽度
+\def\@seccntformat#1{\csname the#1\endcsname\quad}
 \renewcommand\thesection{\chinese{section}、}
 \renewcommand\thesubsection{\arabic{section}\thinspace.\thinspace\arabic{subsection}}
 \renewcommand\thesubsubsection{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
