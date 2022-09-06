@@ -40,7 +40,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \RequirePackage{ctex}
 %\ctexset{fontset = cumcm}
 % 页面布局
-\RequirePackage[a4paper, margin=0.98in]{geometry}
+\RequirePackage{geometry}
 % 数学宏包
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
@@ -143,7 +143,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \RequirePackage{cleveref}
 %% Document Layout
 % 页面布局
-\geometry{top=25mm,bottom=25mm,left=25mm,right=25mm}
+\geometry{a4paper, top=25mm, bottom=30mm, left=25mm, right=25mm}
 \renewcommand*{\baselinestretch}{1.38}
 % 修改tabular 环境, 设置表格中的行间距为正文行间距.
 \let\mcm@oldtabular\tabular
@@ -493,7 +493,8 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 目录深度
 \setcounter{secnumdepth}{3}
 % 节标题格式, 居中, 使用\chinese命令修改计数器
-\def\@seccntformat#1{\csname the#1\endcsname\ }
+%% 设置编号与标题之间的宽度
+\def\@seccntformat#1{\csname the#1\endcsname\quad}
 \renewcommand\thesection{\chinese{section}、}
 \renewcommand\thesubsection{\arabic{section}\thinspace.\thinspace\arabic{subsection}}
 \renewcommand\thesubsubsection{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
@@ -545,7 +546,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 	\renewcommand{\mcm@tokens@keywords}{#1}
 	\par
 	\vskip1ex
-	{\noindent\zihao{-4}\heiti\mcm@cap@keywordsname：}~{\mcm@tokens@keywords}
+	{\zihao{-4}\heiti\mcm@cap@keywordsname：}~{\mcm@tokens@keywords}
 	}
 % 定义附录
 
